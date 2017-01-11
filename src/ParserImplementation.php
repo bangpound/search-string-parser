@@ -132,7 +132,8 @@ abstract class ParserImplementation
     /**
      * @param string $delimiter Delimiter to use within the search object.
      */
-    public function __construct($delimiter = '"') {
+    public function __construct($delimiter = '"')
+    {
         $this->setDelimiter($delimiter);
     }
 
@@ -149,7 +150,7 @@ abstract class ParserImplementation
         if (is_string($mixed)) {
             // string
             $string = $mixed;
-        } elseif(is_array($mixed)) {
+        } elseif (is_array($mixed)) {
             // array:
             $string = $this->recursiveArrayImplode($mixed);
         } elseif (
@@ -157,8 +158,7 @@ abstract class ParserImplementation
             is_float($mixed)
         ) {
             $string = (string)$mixed;
-        }
-        else {
+        } else {
             throw new \Exception('Attempted to parse a bad data type.');
         }
         return $string;
@@ -225,7 +225,7 @@ abstract class ParserImplementation
         $string = trim(preg_replace('/\s+/', ' ', $string));
 
         // is there any string left...
-        if(strlen($string)) {
+        if (strlen($string)) {
             $results = explode(' ', $string);
             // and join back to the main
             if (count($results) > 0) {
@@ -242,10 +242,11 @@ abstract class ParserImplementation
      * @param string $glue Glue to implode with together
      * @return string Converted string
      */
-    protected function recursiveArrayImplode($array, $glue = ' ') {
+    protected function recursiveArrayImplode($array, $glue = ' ')
+    {
         $return = '';
-        foreach($array as $item) {
-            if(is_array($item)) {
+        foreach ($array as $item) {
+            if (is_array($item)) {
                 $return .= $glue . $this->recursiveArrayImplode($item);
             } else {
                 $return .= $glue . $item;
@@ -271,5 +272,4 @@ abstract class ParserImplementation
      * @throws \Exception Generic exception if there is an issue
      */
     abstract public function parse($mixed);
-
-} 
+}

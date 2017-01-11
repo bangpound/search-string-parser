@@ -117,7 +117,6 @@ class ParserEn extends ParserImplementation implements LanguageToolsInterface
         $vowels = implode($this->vowels);
 
         while ($position < $length) {
-
             $result = strcspn($word, $vowels, $position);
             $position = $position + $result;
 
@@ -148,10 +147,8 @@ class ParserEn extends ParserImplementation implements LanguageToolsInterface
      * @param string $word Word to process
      * @return string $return R2 stem of the word
      */
-    public function findR2($word) {
+    public function findR2($word)
+    {
         return $this->findR1($this->findR1($word));
     }
-
-
-
 }

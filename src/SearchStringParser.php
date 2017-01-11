@@ -40,7 +40,6 @@ namespace Floor9design\SearchStringParser;
  */
 class SearchStringParser
 {
-
     private $parser_implementation;
 
     // Accessors
