@@ -1,4 +1,6 @@
 <?php
+use Floor9design\SearchStringParser\ParserImplementation;
+
 /**
  * ParserImplementationTest.php
  *
@@ -37,12 +39,17 @@
  */
 class ParserImplementationTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Floor9design\SearchStringParser\ParserImplementation
+     */
+    private $pi;
 
     /**
      * Set up objects for testing
      */
-    function setUp() {
-        $this->pi = $this->getMockForAbstractClass('Floor9design\SearchStringParser;ParserImplementation');
+    public function setUp()
+    {
+        $this->pi = $this->getMockForAbstractClass(ParserImplementation::class);
     }
 
     /**
@@ -57,5 +64,4 @@ class ParserImplementationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $output);
     }
-
 }

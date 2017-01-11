@@ -35,21 +35,26 @@
  */
 class ParserSimpleTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Floor9design\SearchStringParser\ParserSimple
+     */
+    private $ps;
 
     /**
      * Set up objects for testing
      */
-    function setUp() {
+    public function setUp()
+    {
 
         // Create a stub for the SearchStringParser class.
-        $this->ps = new Floor9design\SearchStringParser;
-        ParserSimple;
+        $this->ps = new Floor9design\SearchStringParser\ParserSimple();
     }
 
     /**
      * Clear object after use
      */
-    function tearDown() {
+    public function tearDown()
+    {
         unset($this->ps);
     }
 
@@ -88,7 +93,8 @@ class ParserSimpleTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelimiterException()
     {
-        $this->setExpectedException('\Exception', 'Attempted to set a delimiter that was not a string.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to set a delimiter that was not a string.');
 
         // invalid data type
         $test_delimiter = array();
@@ -286,7 +292,8 @@ class ParserSimpleTest extends \PHPUnit_Framework_TestCase
     {
         // Arrange
         $test_item = new stdClass();
-        $this->setExpectedException('\Exception', 'Attempted to parse a bad data type.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to parse a bad data type.');
 
         // Act
         $this->ps->parse($test_item);
@@ -300,7 +307,8 @@ class ParserSimpleTest extends \PHPUnit_Framework_TestCase
     {
         // Arrange
         $test_item = true;
-        $this->setExpectedException('\Exception', 'Attempted to parse a bad data type.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to parse a bad data type.');
 
         // Act
         $this->ps->parse($test_item);
@@ -335,5 +343,4 @@ class ParserSimpleTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($test_result, $expected_result);
     }
-
 }

@@ -1,4 +1,6 @@
 <?php
+use Floor9design\SearchStringParser\ParserSimple;
+
 /**
  * SearchStringParserTest.php
  *
@@ -35,14 +37,19 @@
  */
 class SearchStringParserTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Floor9design\SearchStringParser\SearchStringParser
+     */
+    private $ssp;
 
     /**
      * Set up objects for testing
      */
-    function setUp() {
+    public function setUp()
+    {
 
         // Create a stub for the SearchStringParser class.
-        $stub = $this->getMockBuilder('Floor9design\SearchStringParser;ParserSimple')
+        $stub = $this->getMockBuilder(ParserSimple::class)
             ->getMock();
 
         // parse function
@@ -66,8 +73,7 @@ class SearchStringParserTest extends \PHPUnit_Framework_TestCase
             ->method('getDelimiter')
             ->will($this->returnValue('delimiter is set'));
 
-        $this->ssp = new Floor9design\SearchStringParser;
-        SearchStringParser($stub);
+        $this->ssp = new Floor9design\SearchStringParser\SearchStringParser($stub);
     }
 
     /**
@@ -76,14 +82,12 @@ class SearchStringParserTest extends \PHPUnit_Framework_TestCase
     public function testDependencyInjection()
     {
         // Set it up
-        $injected = new Floor9design\SearchStringParser;
-        ParserSimple();
-        $test = new Floor9design\SearchStringParser;
-        SearchStringParser($injected);
+        $injected = new Floor9design\SearchStringParser\ParserSimple();
+        $test = new Floor9design\SearchStringParser\SearchStringParser($injected);
 
         // Test
         $output = $test->getParserImplementation();
-        $this->assertInstanceOf('Floor9design\SearchStringParser;ParserSimple', $output);
+        $this->assertInstanceOf(ParserSimple::class, $output);
     }
 
     /**
@@ -92,10 +96,9 @@ class SearchStringParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testDependencyInjectionBad()
     {
-        $this->setExpectedException(get_class(new PHPUnit_Framework_Error("", 0, "", 1)));
+        $this->expectException(TypeError::class);
         $injected = new \stdClass();
-        new Floor9design\SearchStringParser;
-        SearchStringParser($injected);
+        new Floor9design\SearchStringParser\SearchStringParser($injected);
     }
 
     /**
@@ -139,5 +142,4 @@ class SearchStringParserTest extends \PHPUnit_Framework_TestCase
         $output = $this->ssp->setDelimiter($string);
         $this->assertEquals($expected, $output);
     }
-
 }

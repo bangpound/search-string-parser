@@ -35,21 +35,26 @@
  */
 class ParserEnTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Floor9design\SearchStringParser\ParserEn
+     */
+    private $pen;
 
     /**
      * Set up objects for testing
      */
-    function setUp() {
+    public function setUp()
+    {
 
         // Create a stub for the SearchStringParser class.
-        $this->pen = new Floor9design\SearchStringParser;
-        ParserEn;
+        $this->pen = new \Floor9design\SearchStringParser\ParserEn();
     }
 
     /**
      * Clear object after use
      */
-    function tearDown() {
+    public function tearDown()
+    {
         unset($this->pen);
     }
 
@@ -88,7 +93,8 @@ class ParserEnTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelimiterException()
     {
-        $this->setExpectedException('\Exception', 'Attempted to set a delimiter that was not a string.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to set a delimiter that was not a string.');
 
         // invalid data type
         $test_delimiter = array();
@@ -286,7 +292,8 @@ class ParserEnTest extends \PHPUnit_Framework_TestCase
     {
         // Arrange
         $test_item = new stdClass();
-        $this->setExpectedException('\Exception', 'Attempted to parse a bad data type.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to parse a bad data type.');
 
         // Act
         $this->pen->parse($test_item);
@@ -300,7 +307,8 @@ class ParserEnTest extends \PHPUnit_Framework_TestCase
     {
         // Arrange
         $test_item = true;
-        $this->setExpectedException('\Exception', 'Attempted to parse a bad data type.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Attempted to parse a bad data type.');
 
         // Act
         $this->pen->parse($test_item);
@@ -338,8 +346,10 @@ class ParserEnTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests findR1 with examples provided from http://snowball.tartarus.org/
-     * 
+     *
      * @dataProvider providerTestFindR1
+     * @param $word
+     * @param $r1
      */
     public function testFindR1($word, $r1)
     {
@@ -353,6 +363,8 @@ class ParserEnTest extends \PHPUnit_Framework_TestCase
      * Tests findR1 with examples provided from http://snowball.tartarus.org/
      *
      * @dataProvider providerTestFindR2
+     * @param $word
+     * @param $r2
      */
     public function testFindR2($word, $r2)
     {
