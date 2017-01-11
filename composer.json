@@ -23,16 +23,6 @@
         "phpunit/phpunit": "4.*"
     },
     "autoload": {
-        "psr-0": {
-            "Floor9design\\SearchStringParser\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-0": {
-            "Floor9design\\SearchStringParser\\Test\\": "tests"
-        }
-    },
-    "autoload": {
         "psr-4": {
             "Floor9design\\SearchStringParser\\": "src"
         }
